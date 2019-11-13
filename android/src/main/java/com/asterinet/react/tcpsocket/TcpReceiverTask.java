@@ -37,6 +37,12 @@ public class TcpReceiverTask extends AsyncTask<Pair<TcpSocketClient, TcpReceiver
                 if (bufferCount > 0) {
                     receiverListener.onData(socketId, Arrays.copyOfRange(buffer, 0, bufferCount));
                 }
+                else if(bufferCount == -1){
+              
+                 clientSocket.close();
+                 receiverListener.onClose(socketId, null);
+                 return null;
+                }
             }
         } catch (IOException ioe) {
             if (receiverListener != null && !socket.isClosed()) {
