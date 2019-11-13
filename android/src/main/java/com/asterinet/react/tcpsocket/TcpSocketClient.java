@@ -45,6 +45,8 @@ public class TcpSocketClient {
         InetAddress remoteInetAddress = InetAddress.getByName(address);
         // Create the socket
         socket = new Socket();
+        socket.setKeepAlive(false);
+        socket.setSoTimeout(15000);
         selectedNetwork.bindSocket(socket);
         socket.setReuseAddress(true);
         socket.bind(new InetSocketAddress(localInetAddress, localPort));
