@@ -69,9 +69,11 @@ NSString *const RCTTCPErrorDomain = @"RCTTCPErrorDomain";
 
     NSString *localAddress = (options?options[@"localAddress"]:nil);
     NSNumber *localPort = (options?options[@"localPort"]:nil);
-
+    result = [_tcpSocket connectToHost:host onPort:port error:error];
+    return result;
+    //Hacked here
     if (!localAddress && !localPort) {
-        result = [_tcpSocket connectToHost:host onPort:port error:error];
+        
     } else {
         NSMutableArray *interface = [NSMutableArray arrayWithCapacity:2];
         [interface addObject: localAddress?localAddress:@""];
@@ -85,7 +87,7 @@ NSString *const RCTTCPErrorDomain = @"RCTTCPErrorDomain";
                                      error:error];
     }
 
-    return result;
+    
 }
 
 - (NSDictionary<NSString *, id> *)getAddress
